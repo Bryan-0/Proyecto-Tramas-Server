@@ -193,10 +193,11 @@ def process_list(frame) -> dict:
     return {
         'Ethernet II': {
             'MAC Destino': ' '.join(frame[0:6]),
-            'MAC Origen': ' '.join(frame[6:12]),
+            'MAC Origen': ' '.join(frame[6:12]),                
             'EtherType': process_ethernet_type(ETHER_TYPES.get(''.join(frame[12:14])), ''.join(frame[12:14])),
         },
         'Red': {
+            'TLS': convert_hex_to_decimal(frame[22]),
             'Protocolo': PROTOCOLS.get(convert_hex_to_decimal(frame[23])),
             'IP Origen': '.'.join([str(convert_hex_to_decimal(x)) for x in frame[26:30]]),
             'IP Destino': '.'.join([str(convert_hex_to_decimal(x)) for x in frame[30:34]]),

@@ -3,7 +3,7 @@ from app.utils import process_list
 
 @app.route('/api/frame', methods=['POST'])
 def frame():
-    frame = request.json['content'].split(' ')
+    frame = [byte for byte in request.json['content'].split(' ') if len(byte) == 2]
 
     return {
         'success': True,
